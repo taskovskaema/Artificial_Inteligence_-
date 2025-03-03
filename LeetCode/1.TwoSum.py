@@ -1,4 +1,4 @@
-```ruby
+
 class Solution:
  def twoSum(self, nums:list[int], target:int)->list[int]:
 
@@ -17,4 +17,3 @@ if __name__ == '__main__':
  target=int(input())
 
  print(Solution().twoSum(lista,target))
-```
