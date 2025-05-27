@@ -4,6 +4,44 @@ os.environ['OPENBLAS_NUM_THREADS'] = '1'
 from sklearn.ensemble import  RandomForestClassifier
 # netreba encoder zato sho se float vrednostite
 
+#datasetot pod kodot
+
+if __name__=="__main__":
+
+    col_index=int(input()) #koja kolona treba da se otstrani
+    broj=int(input()) #broj na drva na odluki
+    kriterium=input() #vrednosta za kriteriumot
+    lista=input().split(" ") #novo mnozh. koe ke treba da se klasificira so treniraniot klasifikator
+
+    #bez indeksot od kolonata
+    for row in dataset:
+        del row[col_index]
+
+    del lista[col_index]
+
+
+    train_set=dataset[:int(0.85*len(dataset))]
+    test_set= dataset[int(0.85*len(dataset)):]
+
+    train_x=[row[:-1] for row in train_set]
+    train_y=[row[-1] for row in train_set]
+
+    test_x=[row[:-1] for row in test_set]
+    test_y=[row[-1] for row in test_set]
+
+    klasifikator=RandomForestClassifier(criterion=kriterium,n_estimators=broj, random_state=0)
+    klasifikator.fit(train_x,train_y)
+
+    tocnost= klasifikator.score(test_x,test_y)
+    print("Accuracy: "+ str(tocnost))
+
+    # kako kaj naiven baesov
+    prediction1=klasifikator.predict([lista])[0]
+    print(prediction1)
+    prediction2=klasifikator.predict_proba([lista])[0]
+    print(prediction2)
+
+
 dataset = [[180.0, 23.6, 25.2, 27.9, 25.4, 14.0, 'Roach'],
            [12.2, 11.5, 12.2, 13.4, 15.6, 10.4, 'Smelt'],
            [135.0, 20.0, 22.0, 23.5, 25.0, 15.0, 'Perch'],
@@ -163,38 +201,3 @@ dataset = [[180.0, 23.6, 25.2, 27.9, 25.4, 14.0, 'Roach'],
            [600.0, 29.4, 32.0, 37.2, 41.5, 15.0, 'Bream'],
            [145.0, 22.0, 24.0, 25.5, 25.0, 15.0, 'Perch'],
            [1100.0, 40.1, 43.0, 45.5, 27.5, 16.3, 'Perch']]
-
-if __name__=="__main__":
-
-    col_index=int(input()) #koja kolona treba da se otstrani
-    broj=int(input()) #broj na drva na odluki
-    kriterium=input() #vrednosta za kriteriumot
-    lista=input().split(" ") #novo mnozh. koe ke treba da se klasificira so treniraniot klasifikator
-
-    #bez indeksot od kolonata
-    for row in dataset:
-        del row[col_index]
-
-    del lista[col_index]
-
-
-    train_set=dataset[:int(0.85*len(dataset))]
-    test_set= dataset[int(0.85*len(dataset)):]
-
-    train_x=[row[:-1] for row in train_set]
-    train_y=[row[-1] for row in train_set]
-
-    test_x=[row[:-1] for row in test_set]
-    test_y=[row[-1] for row in test_set]
-
-    klasifikator=RandomForestClassifier(criterion=kriterium,n_estimators=broj, random_state=0)
-    klasifikator.fit(train_x,train_y)
-
-    tocnost= klasifikator.score(test_x,test_y)
-    print("Accuracy: "+ str(tocnost))
-
-    # kako kaj naiven baesov
-    prediction1=klasifikator.predict([lista])[0]
-    print(prediction1)
-    prediction2=klasifikator.predict_proba([lista])[0]
-    print(prediction2)
