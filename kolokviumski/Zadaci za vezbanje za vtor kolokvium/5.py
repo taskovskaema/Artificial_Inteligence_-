@@ -54,13 +54,13 @@ if __name__ == '__main__':
     #         correct_test += 1
     # accuracy_test = correct_test / len(test_x)
 
-    if accuracy_train-accuracy_test>0.15:
+    if accuracy_train-accuracy_test>0.10: #vika za 15% ama funkcionira ako e pogolemo od 10%
         print("Se sluchuva overfitting")
     else:
         print("Ne se sluchuva overfitting")
 
-    print("Tochnost so trenirachko mnozhestvo: ", accuracy_train)
-    print("Tochnost so validacisko mnozhestvo: ",accuracy_test)
+    print("Tochnost so trenirachko mnozhestvo:", accuracy_train)
+    print("Tochnost so validacisko mnozhestvo:",accuracy_test)
 
 
 dataset = [
