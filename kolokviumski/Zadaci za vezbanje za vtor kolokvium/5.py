@@ -1,18 +1,17 @@
 import os
-
-from sklearn.model_selection import learning_curve
-
 os.environ['OPENBLAS_NUM_THREADS'] = '1'
 import warnings
 from sklearn.neural_network import MLPClassifier
+
 # datasetot pod kodot
+
 warnings.filterwarnings("ignore")
 
 if __name__ == '__main__':
 
     epoch_num=float(input())
     learning_rate = int(input())
-    # treba da sodrzhi 6 nevroni vo skrieniot sloj, aktiviran so tanh funkcijata?
+    # treba da sodrzhi 6 nevroni vo skrieniot sloj, aktiviran so tanh funkcijata
 
     class_0 = [row for row in dataset if row[-1] == 0]
     class_1 = [row for row in dataset if row[-1] == 1]
